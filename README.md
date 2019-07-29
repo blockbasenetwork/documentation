@@ -15,3 +15,25 @@ We believe that in order to address this problem, the goal should be to minimize
 
 The advent of Bitcoin led to the birth of a whole new area of research in blockchain systems, within which this project was born, a system for safe and distributed storage of relational databases. BlockBase itself isn’t relational like a typical database, but the operations that it stores are related to operations performed on relational databases. What this means is that, generally, what is stored on BlockBase are typical database operations, such as creating databases, defining the tables that make up those databases, defining the columns of each one of those tables, and finally the addition, updating, and removal of records from those tables.
 
+## Security Features
+BlockBase is a distributed system that applies many of blockchain related paradigms to provide secure and distributed database storage services. Specifically, it’s a system that promotes, by default, the CIA triad of computer security. In these terms, the system has the following fundamental security features:
+
+### Confidentiality
+* The system promotes the confidentiality of data. All data registered in the system is, by default, pre-encrypted.
+* The system provides different levels of access to data, starting from the individual record level at the bottom, to the whole database level at the top, through the use of multiple cryptographic layers on stored data.
+* The system does not encrypt or decrypt the data that it stores. Any data insertion contains previously encrypted data, and any data search returns the data as it was inserted. It is the responsibility of the owner of the data to have the necessary cryptographic elements to encrypt and decrypt the data.
+* Encrypted data is searchable, without disclosing any relevant information about what it contains.
+
+### Integrity
+* The system maintains a historical record of all changes made to the data structure and the data itself that is impossible to be altered or deleted.
+* All changes made to the data structure and the data itself are digitally signed assuring their authenticity and non-repudiation.
+
+### Availability
+* The system is resilient to hardware and software faults, and electricity and internet shortages; to natural disasters such as earthquakes and floods; to human error or deceit; to DDos attacks.
+* The system is horizontally scalable and allows for an unlimited number of users without compromising its availability.
+
+
+
+
+
+
