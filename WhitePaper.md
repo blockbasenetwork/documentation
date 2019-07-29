@@ -51,6 +51,9 @@ As described above, both service requester and service providers must stake toke
 ## EOS for the Main Blockchain
 This system requires a main blockchain that has smart contracts capabilities and that has a high throughput of blocks. After careful analysis, we chose to use the EOS blockchain for this project. Nonetheless, its smart contract technology may be ported to other blockchains that support smart contracts with equivalent capabilities. This system requires two smart contracts, one for managing the sidechains, which we will call here the *operations contract*, and one for managing the sidechains financial accounting, which we will call here the *accounting contract*. For more information on EOS, please check [EOSIO](https://eos.io/).
 
+## BlockBase Token
+BlockBase will use its own token, the BlockBase Token. This is the token that will be used by the *accounting contract*, such as adding stakes and receiving payments for the services provided to sidechain owners.
+
 ## Smart Contracts
 The *operations contract* is a pivotal piece for the consensus, it is the link between the EOS main chain and every BlockBase sidechain. Each producer running the BlockBase client will regularly communicate with the main chain through this contract, and it is also the means to discover requests for service providers from different sidechains.
 
@@ -58,6 +61,11 @@ The *operations contract* is a pivotal piece for the consensus, it is the link b
 The operations contract is responsible for keeping track of the latest block headers that have been accepted as valid by the network. Every time a new block is produced, the other producers in the chain will need to validate it for it to be accepted as valid and to become irreversible in the contract. Since the contract keeps a record of the latest block headers in a chain, a new producer joining the network can easily synchronize and validate every previous block.
 
 Producers who fail to produce blocks during their turn to produce will get flagged in the contract, and added to the blacklist of the sidechain they were producing. If a producer is expelled from the sidechain network, he won’t be able to get its stake back.
+
+### Accounting Contract Role in the Consensus
+The accounting contract is based on the EOS token contract, retaining all of its functions, as well as security measures. This means that users can expect the token to have the same behavior as the EOS token.
+
+The main reason to have a separate contract for accounting is because we predict that the accounting contract will need a lot less maintenance work (ideally none) than the operations contract. The big advantage of this approach is allowing us to change the accounting contract owner permission to a more secure solution, as will be explained later.
 
 ### Requesting a Sidechain Service
 Requesting a new sidechain requires a requester to allocate stake, which will be the source of tokens used to pay the providers working on the sidechain. The requester will be responsible for making sure the stake is enough to pay every producer until the next settlement phase (explained further ahead). If the stake isn’t enough, the sidechain requester will risk losing everything stored in the sidechain as the block producers will stop producing and leave the network.
@@ -89,6 +97,22 @@ In order to maintain consensus, the following steps must be taken:
 * If a block header doesn’t receive the required minimum amount of signatures to be accepted, the block is discarded and the block production is passed to the next producer in line. Similarly, if a producer doesn’t produce a block during the time threshold for its turn, block production is passed to the next producer in line. In both cases, the failure on producing a correct block is counted on the operations contract, where any producer that fails more than the defined maximum of times, will be penalized by being expelled from the producers list and also by losing its stake.
 * After a predefined amount of rounds of block production, block production is halted and the settlement phase is started. The settlement phase is the moment where all operations since the previous settlement are accounted for. Producers are paid according to block production, by transferring tokens staked by the service requester to the block producers. Producers that failed too many times to produce blocks at their turns are expelled from the production list and their stakes are taken from them. Also, during settlement, producers may leave the production pool if their announced production time is up. Also, further block production may be halted, if the remaining staked coins of the service requester are not enough to pay for block production until the next scheduled settlement.
 * For every producer that leaves the pool during a settlement, its place may be filled by another producer. The first producers chosen are the applicants that applied for production but weren’t chosen. If those aren’t enough, a new application phase is started for receiving new producers. Block production isn’t halted during this new application phase, unless the number of remaining producers is lower than a specified limit.
+
+## Staking
+In addition to the regular records of the EOS token contract, the BlockBase accounting contract will also keep a record of all of the tokens that are being staked in each Sidechain, and will provide actions that allow producers and sidechain owners to add and recover stake from a sidechain. Recovering stake from a sidechain is only possible if it is not in active block production, for example, the sidechain could have ended its intended duration, or the number of producer candidates is lower than the number requested by the sidechain owner. Being punished for bad behavior in any sidechain also means that the stakeholders will lose some or even all of their staked tokens.
+
+## Receiving Payments
+After each settlement phase in the consensus, a part of the stake of the sidechain owner is reserved to each block producer. The number of tokens each producer gets is based on the number of blocks produced between phases. To receive the tokens on their accounts, producers will need to call an action in the accounting contract.
+
+This action will automatically check every sidechain where the producer is active and collect all of the rewards that they have earned since the last time they claimed the reward.
+
+## Permissions
+The lack of visible security in the accounting contract owner permissions is one of the leading concerns of alternative tokens in the EOS mainnet. Twelve of the leading fifteen tokens currently have a single key associated with the owner permission (According to data from bloks.io). This means it is theoretically possible that anyone with access to that key is able to update the code for the token smart contract at any moment in a way that could work in their favor. As such, we will implement multiple signature permissions that will help improve the trust in the BlockBase token.
+
+After the creation of the token, the owner permission of contract account will be associated to multiple keys owned by different members of the BlockBase team. This is done only because we predict the possibility of security fixes being necessary and urgent in the following months after the token launch. The owner permission will remain unchanged while the contract becomes more stable.
+
+Once it’s deemed that the contract doesn't need any further changes, we will change the owner permission to the eosio.producers active permission. This is a special permission in EOS that will always require 15/21 producers to approve a transaction (as seen in eosio’s source code), effectively making the token associated with the same permissions as the main EOS token.
+
 
 
 
