@@ -43,6 +43,21 @@ Here, each sidechain exists for the sole purpose of storing data related databas
 
 The most effective way to “connect” a sidechain to a main chain is through the use of smart contracts. The exact way they work is detailed further ahead in this document. But this implies that the main chain must support smart contracts.
 
+## Sidechain-as-a-Service Economic Model
+Since sidechains exist for the purpose of storing database related information, they can be serviced to parties interested in acquiring it, by parties interested in servicing it, provided there is an economic model that benefits both service buyers and service sellers. Thus, each sidechain is born from the agreement on a sidechain service request that specifies its servicing and financial accounting rules, such as: the service level requirements, the financial commitment of the service requester and service provider, the financial incentives for participating as a service provider, and the financial penalties of not complying with the requirements. Service level requirements define various rules such as the minimum number of participants and average blocktime, the financial commitment defines the stakes provided by the service requester and service provider,  the financial incentives define the reward per block production, and the financial penalties define the losses in case the requirements aren’t met. 
+
+As described above, both service requester and service providers must stake tokens in order to participate. The service requester stakes tokens in the service request, which ensures its distribution to the service providers according to block production, and service providers must stake tokens to participate in the service provision, which they will lose if service requirements aren’t met. In such a model, there is no emission of tokens per block produced. Instead, each block produced is paid with a fixed amount of tokens that are taken from the stake of the service requester. Therefore, the service requester and the service provider must acquire tokens in order to participate. These tokens are of finite supply, and are traded on the open market, as any other cryptocurrency or digital asset.
+
+## EOS for the Main Blockchain
+This system requires a main blockchain that has smart contracts capabilities and that has a high throughput of blocks. After careful analysis, we chose to use the EOS blockchain for this project. Nonetheless, its smart contract technology may be ported to other blockchains that support smart contracts with equivalent capabilities. This system requires two smart contracts, one for managing the sidechains, which we will call here the *operations contract*, and one for managing the sidechains financial accounting, which we will call here the *accounting contract*. For more information on EOS, please check [EOSIO](https://eos.io/).
+
+
+
+
+
+
+
+
 
 
 
