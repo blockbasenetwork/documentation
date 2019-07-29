@@ -113,7 +113,20 @@ After the creation of the token, the owner permission of contract account will b
 
 Once it’s deemed that the contract doesn't need any further changes, we will change the owner permission to the eosio.producers active permission. This is a special permission in EOS that will always require 15/21 producers to approve a transaction (as seen in eosio’s source code), effectively making the token associated with the same permissions as the main EOS token.
 
+## Data Storage and Security
+Encryption of sensitive information is very important. Unfortunately, this isn’t the practice on most traditional businesses. Information is usually kept in a non encrypted format, and instead barriers are mounted around the sensitive information, for the purpose of preventing unauthorized access to it. Intranets and user accounts with special privileges are a clear example of this. This usually results in a situation where a small group of people have all access and power over the stored information.
 
+With BlockBase, the system is designed to allow any unknown third-party to participate as a sidechain producer and hence as a data keeper. In this scenario, anyone who wishes to benefit from the security qualities of integrity, availability, and accountability provided by BlockBase, is required to adopt the highest confidentiality standards. Information must be encrypted by default, because it will be available to strangers by default.
+
+There are many strategies for data encryption when stored in a database. One could easily encrypt everything in such a way as to render completely useless any querying functionalities on the database. In such an extreme case, the database owner would have to fetch all the data from all the tables he needed, decrypt all records from each table, and only then proceed to finding the required data. Almost all of the retrieved records would have been unnecessarily fetched for satisfying the given query. This situation is very limitative and in most cases undesired. But in order to reduce the number of unnecessarily fetched records per query, one has to lower the encryption of the data, and consequently its security. This also applies to query variety. The more types of queries allowed, the less secure the data must be.
+
+Hence, data querying is in direct conflict with data security. The goal is to achieve an adequate balance between data querying capabilities and data security. Less important table columns may be more exposed, thus providing better filtering capabilities through them. This subject has been studied extensively, with the development of various types of technical solutions, such as CryptDB, for example. However, the decision of choosing which columns to expose is left to the user of the technology.
+
+Here we present our solution which follows some of the strategies of CryptBD. It will be implemented in the application used by the service requester, e.g. the database owner and the client of the service. This implementation isn’t in any way mandatory for BlockBase to work. Different variants from the client application may be implemented, that could provide different encryption strategies for the data. The service providers have no say on how the data is encrypted.
+
+The proposed implementation uses the Advanced Encryption Standard (AES) extensively for data encryption and key generation, with the use of Cypher Block Chaining (CBC) method with random Initialization Vectors (IV) for data encryption, and with the use of Electronic CodeBook  (ECB) method exclusively for key generation. For every database there should be at least one AES master key, from which all subsequent keys may be derived. More than one AES master key may exist in more complex scenarios where different areas of the database must have different master keys.
+
+The service requester must also possess a password or passphrase, this will be mandatory key generation.
 
 
 
