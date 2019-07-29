@@ -51,6 +51,9 @@ As described above, both service requester and service providers must stake toke
 ## EOS for the Main Blockchain
 This system requires a main blockchain that has smart contracts capabilities and that has a high throughput of blocks. After careful analysis, we chose to use the EOS blockchain for this project. Nonetheless, its smart contract technology may be ported to other blockchains that support smart contracts with equivalent capabilities. This system requires two smart contracts, one for managing the sidechains, which we will call here the *operations contract*, and one for managing the sidechains financial accounting, which we will call here the *accounting contract*. For more information on EOS, please check [EOSIO](https://eos.io/).
 
+## Smart Contracts
+The *operations contract* is a pivotal piece for the consensus, it is the link between the EOS main chain and every BlockBase sidechain. Each producer running the BlockBase client will regularly communicate with the main chain through this contract, and it is also the means to discover requests for service providers from different sidechains.
+
 
 
 
