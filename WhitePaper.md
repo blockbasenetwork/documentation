@@ -210,6 +210,11 @@ Choosing a bucket size of 10, each bucket would have also a lower and upper boun
 
 The resulting hash number is stored as the value for range queries. This approach doesn’t directly reveal order in the data. But with this method range queries won’t work either. Range queries must be transformed to equality queries, that use the hashed values of the upper bounds of all the buckets contained inside the range query. This way, the only thing that may reveal order is the inclusion of various buckets in one query. But this also doesn’t reveal order, only proximity.
 
+## Conclusion
+In this paper we proposed a blockchain system capable of storing user's data without compromising their privacy, using sidechains for horizontal scaling and a dynamic market to incentivize potential block producers to provide their services in return for token rewards. This solution is built on the [EOSIO](https://eos.io) platform and is planned to be launched in the EOS mainnet.
+
+## Disclaimer
+This white paper is provided as is, all the information presented represents the current plans of the BlockBase team and is subject to change at any moment, and shouldn’t be taken as a promise of implementation.
 
 
 
