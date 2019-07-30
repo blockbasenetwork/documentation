@@ -74,6 +74,8 @@ In order to run the sidechain, the account associated with it will need to add t
 
 Verifying blocks in the sidechain will use a multiple signature permission created as a child of the active permission of the account associated with the sidechain, and the smart contract will be responsible of managing this permission. Since the producers that are currently active in the sidechain can change at any time, the keys and threshold needed will be dynamically calculated inside the smart contract. The threshold needed to execute the action will be half the number of producers plus one.
 
+<p align="center"><img src="https://github.com/blockbasenetwork/documentation/blob/master/images/hier.png"></p>
+
 ### Requesting a Sidechain Service
 Requesting a new sidechain requires a requester to allocate stake, which will be the source of tokens used to pay the providers working on the sidechain. The requester will be responsible for making sure the stake is enough to pay every producer until the next settlement phase (explained further ahead). If the stake isn’t enough, the sidechain requester will risk losing everything stored in the sidechain as the block producers will stop producing and leave the network.
 
