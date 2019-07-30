@@ -67,6 +67,13 @@ The accounting contract is based on the EOS token contract, retaining all of its
 
 The main reason to have a separate contract for accounting is because we predict that the accounting contract will need a lot less maintenance work (ideally none) than the operations contract. The big advantage of this approach is allowing us to change the accounting contract owner permission to a more secure solution, as will be explained later.
 
+### Sidechain Account and Permissions
+Each sidechain will be associated to a unique EOS account, it's not possible to have more than one sidechain linked to a single account. The name of this account is used to identify the sidechain, so it will be recommended that sidechain requesters create a new account for the sole purpose of staking the tokens and creating a new sidechain.
+
+In order to run the sidechain, the account associated with it will need to add the eosio.code permission to the contract. It is recommended that the account only acts as a host for the sidechain, and never holds any tokens other than the ones staked to run the sidechain.
+
+Verifying blocks in the sidechain will use a multiple signature permission created as a child of the active permission of the account associated with the sidechain, and the smart contract will be responsible of managing this permission. Since the producers that are currently active in the sidechain can change at any time, the keys and threshold needed will be dynamically calculated inside the smart contract. The threshold needed to execute the action will be half the number of producers plus one.
+
 ### Requesting a Sidechain Service
 Requesting a new sidechain requires a requester to allocate stake, which will be the source of tokens used to pay the providers working on the sidechain. The requester will be responsible for making sure the stake is enough to pay every producer until the next settlement phase (explained further ahead). If the stake isn’t enough, the sidechain requester will risk losing everything stored in the sidechain as the block producers will stop producing and leave the network.
 
