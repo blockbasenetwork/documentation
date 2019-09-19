@@ -3,6 +3,7 @@ The power of Blockchain applied to Databases. Nowadays large quantities of data 
 
 ## More Information
 * [WhitePaper](https://github.com/blockbasenetwork/documentation/blob/master/WhitePaper.md)
+* [WhitePaper tl;dr version](https://github.com/blockbasenetwork/documentation/blob/master/WhitePaper-tldr.md)
 * [Website](http://www.blockbase.network/)
 * [Subreddit](https://www.reddit.com/r/blockbase/)
 * [Twitter](https://twitter.com/BlockBaseNetwk)
