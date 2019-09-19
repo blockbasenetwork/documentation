@@ -4,6 +4,9 @@ Information security is paramount. Here we present BlockBase, a distributed syst
 Each sidechain is born from the agreement on a sidechain service request that specifies its servicing and financial accounting rules, which must be agreed upon by the service requester and service providers through staking of BlockBase tokens that will be lost if the rules aren’t met. 
 All database related data is encrypted and decrypted by the service requester, without revealing any information to the service providers. BlockBase uses the EOSIO blockchain as its main blockchain. BlockBase is currently in pre alpha phase.
 
+
+<p align="center"><img src="https://github.com/blockbasenetwork/documentation/blob/master/images/img1.jpg"></p>
+
 ## Security Features
 BlockBase is a distributed system that applies blockchain related paradigms to provide secure and distributed database storage services. It’s a system that promotes the CIA triad of computer security and has the following fundamental security features:
 
@@ -51,6 +54,8 @@ Producers who fail to produce blocks during their turn will get flagged in the c
 ### Accounting Contract Role in the Consensus
 The accounting contract is based on the EOS token contract, retaining all of its functions, as well as security measures. This means that users can expect the token to have the same behavior as the EOS token.
 
+<p align="center"><img src="https://github.com/blockbasenetwork/documentation/blob/master/images/img2.jpg"></p>
+
 ### Requesting a Sidechain Service
 Requesting a new sidechain requires a requester to allocate stake, which will be the source of tokens used to pay the providers working on the sidechain. The requester will be responsible for making sure the stake is enough to pay every producer until the next settlement phase (explained further ahead).
 
@@ -63,6 +68,8 @@ All sidechains are managed through the use of the two smart contracts. It requir
 * Applicants Selection Phase
 * Sidechain Production Phase
 
+<p align="center"><img src="https://github.com/blockbasenetwork/documentation/blob/master/images/img3.jpg"></p>
+
 ## Receiving Payments
 The number of tokens each producer gets is based on the number of blocks produced between settlements.
 
@@ -73,6 +80,8 @@ The security of BlockBase is based on CryptBD. This implementation isn’t in an
 With our implementation, the service requester only needs to possess a master key and a password or passphrase. All remaining keys are derived from these two, and enable a hierarchical encryption of the database.
 
 In order to query data, a bucketing approach is used. The larger the bucket the less information it reveals about the data, but also the less it aids in helping to filter or order the data. Two different techniques are used to allow for equality queries and range queries.
+
+<p align="center"><img src="https://github.com/blockbasenetwork/documentation/blob/master/images/img4.jpg"></p>
 
 
 ## Conclusion
